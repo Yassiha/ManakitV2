@@ -2,3 +2,53 @@
 @import "alert";
 @import "avatar";
 @import "navbar";
+@import "logo";
+@import "checks";
+@import "cards";
+@import "buttons";
+@import "task_form";
+@import "container";
+@import "animejs";
+@import "forms";
+@import "bars";
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+
+
+.wrapper {
+  overflow: scroll;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+background: linear-gradient(124deg, #FFFFFF, #e6e6e6, #FFFFFF, #e6e6e6, #FFFFFF, #e6e6e6, #FFFFFF, #e6e6e6, #cccccc);
+background-size: 100% 1800%;
+
+-webkit-animation: rainbow 18s ease infinite;
+-o-animation: rainbow 18s ease infinite;
+  animation: rainbow 18s ease infinite;}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+}

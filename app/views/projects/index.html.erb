@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+            <%= link_to " Defining a new objective", new_project_path, class: 'nav-link fas fa-hands-helping bigger-icon'%>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <% @projects.each do |project|  %>
+    <div class="projects-cards">
+      <%= link_to project_path(project) do %>
+        <div class="justify-content-center">
+          <div class="project-card">
+            <div class="project-card-title">
+              <h1 class="text-center">
+                <span class="fas fa-hands-helping middle-icon"></span>
+                <%= project.title %>
+              </h1>
+              <div class="ldBar label-center" data-value="<%= project.status %>" data-preset="stripe"> </div>
+              <br>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <% end %>
+  </div>
+

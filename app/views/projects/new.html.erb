@@ -1,0 +1,15 @@
+<br>
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @project, url: projects_path, method: :post do |f| %>
+    <h2 class="fas fa-hands-helping">+ Define a new Objective</h2>
+    <%= f.input :title, label: "Title:" %>
+    <%= f.input :description, label: "Description:", :input_html => { :rows => 7 , :style => 'width: 100%'} %>
+    <%= f.input :delivery_date, label: "Delivery:" %>
+
+    <%= f.button :submit, value: 'Start', "data-disable-with" => "Creating..", class:"btn btn-outline-primary" %>
+  <% end %>
+  </div>
+
+  <br>
+</div>

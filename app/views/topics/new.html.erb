@@ -1,0 +1,11 @@
+<br>
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @topic, url: project_mission_topics_path(@project, @mission), method: :post do |f| %>
+    <h2 class="far fa-comments">+ Open a topic:</h2>
+    <%= f.input :title, label: "Title:" %>
+    <%= f.button :submit, value: 'New topic', "data-disable-with" => "Creating..", class: "btn btn-outline-primary" %>
+  <% end %>
+  </div>
+  <br>
+</div>

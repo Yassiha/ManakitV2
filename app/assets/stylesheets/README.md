@@ -1,7 +1,8 @@
-First of all make sure you've created a rails app
+First of all make sure you've created a rails app with the `--webpack` flag, like this
 
 ```bash
-rails new APP_NAME
+rails new APP_NAME --webpack
+# If you have, don't run the command again!
 ```
 
 ## Setup
@@ -9,7 +10,8 @@ rails new APP_NAME
 Ensure you have bootstrap and it's dependencies
 
 ```bash
-yarn add bootstrap@4.6 jquery popper.js
+yarn add bootstrap
+yarn add jquery popper.js
 ```
 
 Ensure you have the following gems in your Rails `Gemfile`
@@ -35,8 +37,6 @@ rm -rf app/assets/stylesheets
 curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip
 unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets
 ```
-
-**On Ubuntu/Windows**: if the `unzip` command returns an error, please install it first by running `sudo apt install unzip`.
 
 And the viewport in the layout
 
@@ -78,7 +78,16 @@ Finally import bootstrap:
 // app/javascript/packs/application.js
 import 'bootstrap';
 ```
+And add this to `application.html.erb`
+```erb
+<!-- app/views/layouts/application.html.erb -->
 
+  <!-- [...] -->
+
+  <%= javascript_include_tag "application" %> <!-- from app/assets/javascripts/application.js -->
+  <%= javascript_pack_tag "application" %>    <!-- from app/javascript/packs/application.js -->
+</body>
+```
 ## Adding new `.scss` files
 
 Look at your main `application.scss` file to see how SCSS files are imported. There should **not** be a `*= require_tree .` line in the file.
@@ -125,4 +134,4 @@ Our `layouts/_navbar.scss` code works well with our home-made ERB template which
 - [version without login](https://github.com/lewagon/awesome-navbars/blob/master/templates/_navbar_wagon_without_login.html.erb)
 - [version with login](https://github.com/lewagon/awesome-navbars/blob/master/templates/_navbar_wagon.html.erb)
 
-Don't forget that `*.html.erb` files go in the `app/views` folder, and `*.scss` files go in the `app/assets/stylesheets` folder. Also, our navbars have a link to the `root_path`, so make sure that you have a `root to: "controller#action"` route in your `config/routes.rb` file.
+Don't forget that `*.html.erb` files go in the `app/views` folder, and `*.scss` files go in the `app/assets/stylesheets` folder. Also, our navbar have a link to the `root_path`, so make sure that you have a `root to: "controller#action"` route in your `config/routes.rb` file.

@@ -3,10 +3,15 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import { anime11 } from '../components/animejs';
+import { anime1 } from '../components/animejs';
+import { barjs } from '../components/bars';
+
 
 Rails.start()
 Turbolinks.start()
@@ -28,3 +33,14 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });
+
+if (document.querySelector(".ml11 .letters")){
+anime1();
+anime11();
+};
+
+if (document.querySelector(".ldBar")){
+barjs();
+};
+
+

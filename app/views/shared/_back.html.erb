@@ -1,0 +1,35 @@
+<% if params[:controller] == 'users' && params[:action] == 'show' %>
+  <%= link_to '', projects_path(current_user), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'pages' && params[:action] == 'home' %>
+
+<% elsif params[:controller] == 'dashboard' && params[:action] == 'show' %>
+  <%= link_to '', :back, class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'projects' && params[:action] == 'new' %>
+  <%= link_to '', root_path, class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'projects' && params[:action] == 'show' %>
+  <%= link_to '', root_path, class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'missions' && params[:action] == 'new' %>
+  <%= link_to '', project_path(params[:project_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'add_project_member' && params[:action] == 'new' %>
+  <%= link_to '', project_path(params[:project_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'projects' && params[:action] == 'edit' %>
+  <%= link_to '', project_path(params[:id]) , class: 'fas fa-backward bigger-icon'  %>
+<% elsif params[:controller] == 'missions' && params[:action] == 'show' %>
+  <%= link_to '', project_path(params[:project_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'tasks' && params[:action] == 'new' %>
+  <%= link_to '', project_mission_path(params[:project_id],params[:mission_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'topics' && params[:action] == 'new' %>
+  <%= link_to '', project_mission_path(params[:project_id],params[:mission_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'missions' && params[:action] == 'edit' %>
+  <%= link_to '', project_mission_path(params[:project_id],params[:id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'topics' && params[:action] == 'show' %>
+  <%= link_to '', project_mission_path(params[:project_id],params[:mission_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'topics' && params[:action] == 'edit' %>
+  <%= link_to '', project_mission_topic_path(params[:project_id],params[:mission_id], params[:id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'tasks' && params[:action] == 'show' %>
+  <%= link_to '', project_mission_path(params[:project_id],params[:mission_id]), class: 'fas fa-backward bigger-icon' %>
+<% elsif params[:controller] == 'tasks' && params[:action] == 'edit' %>
+  <%= link_to '', project_mission_task_path(params[:project_id],params[:mission_id], params[:id]), class: 'fas fa-backward bigger-icon' %>
+<% else %>
+  <%= link_to '', :back, class: 'fas fa-backward bigger-icon' %>
+<% end %>

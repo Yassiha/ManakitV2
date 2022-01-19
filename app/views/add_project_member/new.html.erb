@@ -1,0 +1,11 @@
+<br>
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @user, url: project_add_project_member_index_path, method: :post do |f| %>
+    <h2 class="fas fa-user">+ Add a partner</h2>
+    <%= f.input :email, label: "Email:", hint: "They have to create and account before!" %>
+      <%= f.button :submit, value: 'Start', "data-disable-with" => "Creating..", class:"btn btn-outline-primary" %>
+  <% end %>
+  </div>
+  <br>
+</div>

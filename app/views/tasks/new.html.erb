@@ -1,0 +1,14 @@
+<br>
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @task, url: project_mission_tasks_path, method: :post do |f| %>
+      <h2 class="fas fa-thumbtack">+ New task</h2>
+      <%= f.input :title, label: 'Titre:', required: true %>
+      <%= f.input :description, label: 'Description:', :input_html => { :rows => 7 , :style => 'width: 100%'} %>
+      <%= f.input :start_date, label: 'Start-date' %>
+      <%= f.input :due_date, label: 'End-date ' %>
+      <%= f.input :priority, label: 'Priority', collection: ['Critical', 'Moderate', 'Negligible'], default: 'Moderate' %>
+      <%= f.button :submit, value: 'Add task', "data-disable-with" => "Creating..", class: "btn btn-outline-primary" %>
+    <% end %>
+  </div>
+</div>

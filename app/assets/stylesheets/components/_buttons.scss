@@ -1,0 +1,43 @@
+.btn-delete {
+  display: flex;
+  text-align: right;
+}
+
+.bigger-icon {
+  color: gray;
+  font-size: 200%;
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.middle-icon {
+  color: gray;
+  font-size: 120%;
+  a {
+  text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-sign-up {
+  color:white;
+  background-color: red;
+  border: 1px solid red;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.btn-sign-up:hover {
+  background-color: white;
+  color:green;
+  border: 1px solid green;
+}

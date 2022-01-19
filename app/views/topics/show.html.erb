@@ -1,0 +1,43 @@
+<br>
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills"><i class=""></i>
+        <% if current_user == @topic.mission.project.manager%>
+          <li class="nav-item">
+            <%= link_to "", edit_project_mission_topic_path(@topic.mission.project, @topic.mission, @topic), method: :get, class: 'nav-link far fa-edit bigger-icon' %>
+            <div class="hint">Edit topic</i></div>
+          </li>
+          <li class="nav-item">
+             <%= link_to "", project_mission_topic_path(@topic.mission.project, @topic.mission, @topic), method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: 'nav-link far fa-trash-alt bigger-icon' %>
+             <div class="hint red">Delete topic</i></div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="card-body" id="messages">
+      <br>
+      <h2 class="card-title far fa-comments"> <%= @topic.title %></h2>
+      <br><hr><br>
+      <% if @topic.status == 2 || @topic.status == nil %>
+        <h2 class="card-title far fa-comment"> New message </h2>
+        <%= simple_form_for @message, url: project_mission_topic_messages_path(@topic.mission.project, @topic.mission, @topic), method: :post do |f| %>
+            <%= f.input :content  ,label: "Collaborate and make it happend!"  %>
+          <%= f.button :submit, value: 'Publish', "data-disable-with" => "Creating..", class: "btn btn-outline-primary" %>
+        <% end %>
+      <% else %>
+          <h3>Closed</h3>
+      <% end %>
+
+    </div>
+  </div>
+  <br>
+    <br>
+  <% @topic.messages.order(created_at: :desc).each do |message| %>
+    <div class="card">
+      <div class="card-content">
+      </div>
+    </div>
+    <br>
+  <% end %>  </div>
+</div>

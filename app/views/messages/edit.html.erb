@@ -1,0 +1,13 @@
+<br>
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @message, url: project_mission_topic_message_path(@message.topic.mission.project, @message.topic.mission, @message.topic, @message), method: :patch do |f| %>
+    <h2 class="far fa-edit"> Update your message</h2>
+    <%= f.input :content, label: "Content:" %>
+
+      <%= f.button :submit, value: 'Update', "data-disable-with" => "Creating..", class:"btn btn-outline-primary" %>
+  <% end %>
+  </div>
+
+  <br>
+</div>

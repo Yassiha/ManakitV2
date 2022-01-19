@@ -1,0 +1,15 @@
+<br>
+<div class="container">
+  <div class="form">
+    <%= simple_form_for @mission, url: project_missions_path(@project), method: :post do |f| %>
+      <h2 class="fas fa-tasks">+ New action plan</h2>
+      <%= f.input :title, label: "Title:" %>
+      <%= f.input :description, label: "Informations:", :input_html => { :rows => 7 , :style => 'width: 100%'} %>
+      <%= f.input :start_date, label: 'Start-date', :order => [:day, :month, :year] %>
+      <%= f.input :due_date, label: 'End-date ', :order => [:day, :month, :year] %>
+      <%= f.input :priority, label: 'Priority', collection: ['Negligible', 'Moderate', 'Critical'] %>
+      <%= f.button :submit, value: 'Create', "data-disable-with" => "Creating..", class: "btn btn-outline-primary" %>
+    <% end %>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+<br>
+<div class="container">
+  <div class="card text-center">
+  <div class="card-body">
+    <br>
+    <h2 class="card-title fas fa-thumbtack"> <%= @task.title %></h4>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= @status %> "> <%= @status %> </div>
+  </div>
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <%= link_to "", edit_project_mission_task_path(@task.mission.project, @task.mission, @task), method: :get, class: 'nav-link far fa-edit bigger-icon' %>
+        <div class="hint">Edit task</i></div>
+      </li>
+      <li class="nav-item">
+        <%= link_to "", "#", method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: 'nav-link far fa-trash-alt bigger-icon' %>
+        <div class="hint red">Delete task</i></div>
+
+      </li>
+    </ul>
+    <p class="card-text">
+      <%= simple_format(@task.description) %> </p>
+    <br><hr><br>
+    <h4 class="card-title fas fa-star"> Criticality: </h4>
+    <p class="card-text"><%= @task.priority %></p>
+    <br><hr><br>
+    <h4 class="card-title fas fa-calendar-alt  <%= date_color(@task) %>"> Time: </h4>
+    <p class="card-text"> From <strong><%= @task.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= @task.due_date.strftime("%d/%m/%Y") %> </strong></p>
+    <br><hr><br>
+    <h4 class="card-title fas fa-spinner"> Status: </h4>
+      <div class="task-form">
+        <%= simple_form_for @task, url: project_mission_task_path(params[:project_id], params[:mission_id], @task), method: :patch do |f| %>
+          <%= f.input :status, as: :range, label: false  %>
+          <%= f.input :finish, label: 'Done!', hint: 'If checked as done, Status is automatically set to 100%'  %>
+            <%= f.button :submit, value: 'Update', "data-disable-with" => "Creating.." %>
+          </button>
+        <% end %>
+        <br>
+      </div>
+  </div>
+</div>
+<br>

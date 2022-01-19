@@ -1,0 +1,38 @@
+  // Specific CSS for your home-page
+.card-homepage {
+    padding-bottom: 4em;
+    padding-top: 8em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    vertical-align: center;
+    position: relative;
+    height: 100vh;
+}
+
+    .hashtags {
+      font-weight: 800;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+    }
+
+.white-background {
+  border-bottom: 1px solid #bc002d;
+  padding: 16px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+
+}
+
+.app-infos {
+  height: 100vh;
+}
+
+.red-line {
+  border-bottom: 0.5px solid rgba(188, 0, 45, 0.5);
+}
+
+.lighter {
+  font-weight: lighter;
+}

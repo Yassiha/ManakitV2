@@ -1,0 +1,97 @@
+<br>
+<div class="container">
+  <div class="card text-center">
+    <div class="card-body">
+      <br>
+      <h2 class="card-title fas fa-hands-helping"> <%= @project.title %></h4>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= @status %>"><%= @status %></div>
+    </div>
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <%= link_to "+", new_project_mission_path(@project), class: 'nav-link fas fa-tasks bigger-icon' %>
+          <div class="hint">New action plan</i> </div>
+        </li>
+        <% if current_user == @project.manager %>
+          <li class="nav-item">
+            <%= link_to "+", new_project_add_project_member_path(@project), class: 'nav-link fas fa-user bigger-icon' %>
+            <div class="hint">New team member</i></div>
+          </li>
+        <% end %>
+        <% if current_user == @project.manager %>
+          <li class="nav-item">
+            <%= link_to "", edit_project_path(@project), method: :get, class: 'nav-link far fa-edit bigger-icon' %>
+            <div class="hint">Edit objective</i></div>
+
+          </li>
+        <% end %>
+        <% if current_user == @project.manager %>
+          <li class="nav-item">
+            <%= link_to "", @project, method: :delete, data: { confirm: 'WARNING you will delete an entire objective!', disable_with: 'loading...' }, class: 'nav-link far fa-trash-alt bigger-icon' %>
+          <div class="hint red">Delete objective</i></div>
+          </li>
+
+        <% end %>
+
+      </ul>
+      <p class="card-text"><%= simple_format(@project.description) %></p>
+      <br><hr><br>
+      <h2 class="card-title fas fa-users"> Members: </h4>
+      <p class="card-text">
+        <% @project.users.each do |user| %>
+          <% if user.name != nil && user.name != "" %>
+            <%= user.name %>
+          <% else %>
+            <%= user.email %>
+          <% end %>
+          <% if user != current_user && current_user == @project.manager %>
+            <%= link_to "-", project_add_project_member_path(@project, user),
+                            method: :delete, data: { confirm: 'WARNING you will remove this member from this project!',
+                            disable_with: 'loading...' }, class: 'nav-link fas fa-user middle-icon' %>
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br><hr><br>
+      <h2 class="card-title fas fa-calendar-alt"> Delivery: </h4>
+      <p class="card-text"><%= @project.delivery_date.strftime("%d/%m/%Y") %></p>
+      <br>
+    </div>
+  </div>
+  <br>
+  <% if @missions.count == 0 %>
+    <%= link_to new_project_mission_path(@project) do %>
+      <div class="card-product">
+        <div class="card-product-infos">
+          <h2>
+            Add your first action plan <i class="far fa-plus-square middle-icon"></i>
+          </h2>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <% @missions.order(priority: :asc, due_date: :asc, status: :asc).each do |mission|  %>
+      <%= link_to project_mission_path(mission.project, mission) do %>
+        <div class="card-product">
+          <div class="card-product-infos">
+            <h2><span class="fas fa-tasks <%= status_color(mission) %>"></span> <%= mission.title %></h2>
+            <p><span class="far fa-calendar-alt"> <strong><%= mission.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= mission.due_date.strftime("%d/%m/%Y") %> </strong></span></p>
+            <div class="d-flex justify-content-between">
+            <p>
+              <span class="fas fa-star <%= priority_color(mission) %>"></span> <%= mission.priority %>
+            </p>
+            <p>
+              <span class="fas fa-spinner <%= status_color(mission) %>"><%= "#{mission.status.to_s}%"%></span>
+            <p>
+            </div>
+            <% mission.tasks.each do |task|  %>
+              |<span class="fas fa-thumbtack <%= status_color(task) %> "></span>
+              <% end  %>
+          </div>
+        </div>
+      <% end %>
+    <br>
+    <% end %>
+<% end %>
+</div>
+

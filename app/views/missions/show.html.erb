@@ -1,0 +1,100 @@
+<br>
+<div class="container">
+  <div class="card text-center">
+    <div class="card-body">
+      <br>
+      <h2 class="card-title fas fa-tasks"> <%= @mission.title %></h4>
+      <p class="card-text"><%= simple_format(@mission.description) %></p>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <%= @status %>"><%= @status %></div>
+    </div>
+      <ul class="nav nav-pills card-header-pills"><i class=""></i>
+        <li class="nav-item">
+          <%= link_to "+", new_project_mission_task_path(@mission.project, @mission), class: 'nav-link fas fa-thumbtack bigger-icon'  %>
+                    <div class="hint">New task</i> </div>
+        </li>
+        <li class="nav-item">
+          <%= link_to "+", new_project_mission_topic_path(@mission.project, @mission), class: 'nav-link far fa-comments bigger-icon'  %>
+          <div class="hint">New topic</i> </div>
+
+        </li>
+        <% if current_user == @mission.project.manager%>
+          <li class="nav-item">
+            <%= link_to "", edit_project_mission_path(@mission.project, @mission), method: :get, class: 'nav-link far fa-edit bigger-icon' %>
+            <div class="hint">Edit action plan</i> </div>
+
+          </li>
+          <li class="nav-item">
+            <%= link_to "", "#", method: :delete, data: { confirm: 'Are you sure?', disable_with: 'loading...' }, class: 'nav-link far fa-trash-alt bigger-icon' %>
+            <div class="hint red">Delete objective</i></div>
+          </li>
+        <% end %>
+      </ul>
+      <h4 class="card-title fas fa-star"> Priority: </h4>
+      <p class="card-text"><%= @mission.priority %></p>
+      <br><hr><br>
+      <h2 class="card-title fas fa-calendar-alt"> Time: </h4>
+      <p class="card-text">From <strong><%= @mission.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= @mission.due_date.strftime("%d/%m/%Y") %> </strong></p>
+    </div>
+    <br>
+  </div>
+    <br>
+    <% if @mission.topics.count == 0 %>
+      <%= link_to new_project_mission_topic_path(@mission.project, @mission) do %>
+        <div class="card-product">
+          <div class="card-product-infos">
+            <h2>
+              <i class="far fa-comments bigger-icon high"> Add your first topic</i>
+            </h2>
+          </div>
+        </div>
+        <br>
+      <% end %>
+    <% else %>
+      <% @mission.topics.each do |topic| %>
+        <%= link_to project_mission_topic_path(topic.mission.project, topic.mission, topic) do %>
+          <div class="card-product">
+            <div class="card-product-infos">
+              <h2><span class="far fa-comments"></span> <%= topic.title %> </h2>
+              <% if topic.messages.count > 0 && (topic.status == 2 || topic.status == nil) %>
+                <p><%= "#{topic.messages.last.user.name} | #{topic.messages.last.updated_at}"  %></p>
+                <p><%= topic.messages.last.content.truncate(460)%></p>
+              <% elsif topic.messages.count == 0  %>
+                <p>Collaboration is the key. Engage the conversation and let the magic happen !</p>
+              <% else %>
+                <i class="fas fa-lock"> Locked</i>
+              <% end %>
+            </div>
+        </div>
+        <% end %>
+        <br>
+      <% end %>
+    <% end %>
+    <% if @mission.tasks.count == 0 %>
+      <%= link_to new_project_mission_task_path(params[:project_id], params[:id]) do %>
+        <div class="card-product">
+          <div class="card-product-infos">
+            <h2>
+              <i class="fas fa-tasks bigger-icon high"> Add your first task</i>
+            </h2>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+    <% @mission.tasks.order(priority: :asc, due_date: :asc, status: :asc).each do |task| %>
+    <%= link_to project_mission_task_path(params[:project_id], @mission, task) do %>
+      <div class="card-product no-link-style">
+        <div class="card-product-infos">
+          <h2><span class="fas fa-thumbtack <%= status_color(task) %>"></span> <%= task.title %></h2>
+          <p class="far fa-calendar-alt"> <strong> <%= task.start_date.strftime("%d/%m/%Y") %></strong> to <strong><%= task.due_date.strftime("%d/%m/%Y") %></strong> </p>
+          <p><span class="fas fa-star <%= priority_color(task) %>"> <%= task.priority %> </span></p>
+          <p class="card-title">
+            <span class="fas fa-spinner <%= status_color(task) %>"><%= "#{task.status.to_s}%" %></span>
+          </p>
+        </div>
+      </div>
+    <% end %>
+    <br>
+    <% end %>
+  <% end %>
+</div>
