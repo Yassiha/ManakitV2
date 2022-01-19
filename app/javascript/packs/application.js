@@ -27,11 +27,11 @@ ActiveStorage.start()
 import "bootstrap";
 
 // Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+import { initTopicCable } from '../channels/topic_channel';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  // initSelect2();
+  initTopicCable();
 });
 
 if (document.querySelector(".ml11 .letters")){

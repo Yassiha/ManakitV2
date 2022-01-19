@@ -1,10 +1,13 @@
-<%= "#{message.user.name} | #{message.user.email} | "  %>
-        <%= message.updated_at.strftime("%d/%m/%Y") %>
-        <% if message.user == current_user %>
-         | <%= link_to "", edit_project_mission_topic_message_path(message.topic.mission.project, message.topic.mission, message.topic, message), method: :get, class: 'far fa-edit' %>
-          <% if message.created_at != message.updated_at %>
-            <span class="text-italic"> <%= "Message updated at #{message.updated_at.strftime("%d/%m/%Y - %H:%M")}" %></span>
-          <% end %>
-        <% end %>
-        <br><hr>
-        <%= simple_format(message.content) %>
+<div class="card card-content">
+  <%= "#{message.user.name} | #{message.user.email} | "  %>
+  <%= message.updated_at.strftime("%d/%m/%y %H:%M") %>
+    <% if message.user == current_user %>
+      <%= link_to "", edit_project_mission_topic_message_path(message.topic.mission.project, message.topic.mission, message.topic, message), method: :get, class: 'far fa-edit' %>
+      <% if message.created_at != message.updated_at %>
+        <span class="text-italic"> <%= "Message updated at #{message.updated_at.strftime("%d/%m/%Y - %H:%M")}" %></span>
+      <% end %>
+    <% end %>
+    <br><hr>
+  <%= simple_format(message.content) %>
+</div>
+<br>

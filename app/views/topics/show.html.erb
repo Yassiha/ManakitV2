@@ -15,7 +15,7 @@
         <% end %>
       </ul>
     </div>
-    <div class="card-body" id="messages">
+    <div class="card-body">
       <br>
       <h2 class="card-title far fa-comments"> <%= @topic.title %></h2>
       <br><hr><br>
@@ -31,13 +31,13 @@
 
     </div>
   </div>
-  <br>
-    <br>
-  <% @topic.messages.order(created_at: :desc).each do |message| %>
-    <div class="card">
-      <div class="card-content">
-      </div>
-    </div>
-    <br>
-  <% end %>  </div>
+  <br><br>
+  <div class="card-body" id="messages" data-topic-id="<%= @topic.id %>">
+    <% @topic.messages.order(created_at: :desc).each do |message| %>
+      <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
 </div>
+
+
+
